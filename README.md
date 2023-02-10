@@ -2,11 +2,11 @@
 
 The client has been developed as part of a research programme investigating agent-based manufacturing systems ([Brokering Additive Manufacturing](https://dmf-lab.co.uk/brokering-additive-manufacturing/)). It is isomorphic capable of running on server (Node.js) and client-side (Browser) applications.
 
-**Current Under Construction**
+**Current Under Construction and Untested**
 
 ## Client Docs
 
-The client documentation have been produced using [TypeDoc](https://typedoc.org/) and can be accessed [here](https://jamesgopsill.github.io/eiger-client/). More details on the API can be found at [HP](https://developers.hp.com/3d-printing-apis).
+The client documentation have been produced using [TypeDoc](https://typedoc.org/) and can be accessed [here](https://jamesgopsill.github.io/hp-3d-device-client). More details on the API can be found at [HP](https://developers.hp.com/3d-printing-apis).
 
 ## Contributing
 

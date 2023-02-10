@@ -20,3 +20,5 @@ export interface DeviceProxy {
 		href: string
 	}
 }
+
+export type ObjectOrStringOrBuffer = { [k: string]: any } | string | Buffer

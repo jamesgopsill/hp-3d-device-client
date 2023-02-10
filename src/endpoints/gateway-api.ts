@@ -1,31 +1,26 @@
 import type { DeviceProxy, HPClient } from "../index.js"
 
+export async function devices(this: HPClient) {
+	const url = `${this._baseUrl}/devices`
+	return this._fetch<string>("GET", url)
+}
+
 export async function login(
 	this: HPClient,
 	username: string,
 	password: string
 ) {
 	const discoverUrl = `${this._ccServerUrl}:8443/discovery`
-	const r1 = await fetch(discoverUrl)
-	if (!r1.ok) {
+	const r1 = await this._fetch<DeviceProxy>("GET", discoverUrl)
+	if (!r1.ok || r1.status != 200) {
 		console.log(`Could not find discovery service at ${discoverUrl}`)
 		return false
 	}
-	const dp: DeviceProxy = await r1.json()
-	this._baseUrl = dp.DeviceProxy.href
+	this._baseUrl = r1.data.DeviceProxy.href
 	const authUrl = `${this._baseUrl}/authenticate`
 	const body = { username, password }
-	const config: RequestInit = {
-		method: "POST",
-		mode: "cors",
-		headers: {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-		},
-		body: JSON.stringify(body),
-	}
-	const r2 = await fetch(authUrl, config)
-	if (!r2.ok) {
+	const r2 = await this._fetch<string>("POST", authUrl, body)
+	if (!r2.ok || r2.status != 200) {
 		console.log(`${r2.status}: ${await r2.text()}`)
 		return false
 	}
@@ -35,16 +30,7 @@ export async function login(
 
 export async function refreshToken(this: HPClient) {
 	const url = `${this._baseUrl}/authentication/refresh`
-	const config: RequestInit = {
-		method: "POST",
-		mode: "cors",
-		headers: {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-		},
-		body: this._accessToken,
-	}
-	const r = await fetch(url, config)
+	const r = await this._fetch("POST", url, this._accessToken)
 	if (r.ok) return true
 	return false
 }
