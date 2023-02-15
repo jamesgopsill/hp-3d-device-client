@@ -6,12 +6,21 @@
 	"main": "./dist/cjs/index.js",
 	"module": "./dist/esm/index.js",
 	"keywords": [
-		"Eiger API",
-		"Markforged"
+		"HP",
+		"3D Printing API"
 	],
 	"author": "James Gopsill",
 	"license": "MIT",
 	"private": false,
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/jamesgopsill/hp-3d-device-client"
+	},
+	"homepage": "https://jamesgopsill.github.io/hp-3d-device-client",
+	"funding": {
+		"type": "individual",
+		"url": "https://github.com/sponsors/jamesgopsill"
+	},
 	"files": [
 		"dist/**/*"
 	],
